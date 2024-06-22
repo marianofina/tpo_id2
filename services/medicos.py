@@ -38,7 +38,7 @@ def medico_modify():
         query = "UPDATE medicos SET "
         for key in data:
             if key != 'id_medi':
-                query += f"{key} = '{data[key]}'"
+                query += f"{key} = '{data[key]}', "
         query = query.replace("''", "' '")
         query = query[:-2]
         query += f" WHERE id_medi = '{data['id_medi']}'"
