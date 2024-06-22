@@ -83,7 +83,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`medicos` (
   `legajo_medi` VARCHAR(45) NOT NULL,
   `nombre_med` VARCHAR(45) NULL,
   `apellido_med` VARCHAR(45) NULL,
-  `nacimiento_med` VARCHAR(45) NULL,
+  `nacimiento_med` DATE NULL,
   `ingreso_med` DATE NOT NULL,
   `egreso_med` DATE NULL,
   PRIMARY KEY (`id_medi`),
@@ -120,7 +120,9 @@ CREATE TABLE IF NOT EXISTS `mydb`.`medicos_especialidad` (
     FOREIGN KEY (`id_medico`)
     REFERENCES `mydb`.`medicos` (`id_medi`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON UPDATE NO ACTION),
+  CONSTRAINT `UC_DISPONIBILIDADES`
+    UNIQUE (`id_medico`, `id_especialidad`)
 ENGINE = InnoDB;
 
 
@@ -129,8 +131,8 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mydb`.`disponibilidades` (
   `id_disp` VARCHAR(11) NOT NULL,
-  `horainicio_disp` TIME NOT NULL,
-  `horafin_disp` TIME NULL,
+  `horainicio_disp` VARCHAR(5) NOT NULL,
+  `horafin_disp` VARCHAR(5) NULL,
   `id_meep` VARCHAR(11) NULL,
   `dia_disp` ENUM("Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo") NULL,
   PRIMARY KEY (`id_disp`),
@@ -150,7 +152,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`citas` (
   `id_cita` VARCHAR(11) NOT NULL,
   `id_disp` VARCHAR(11) NOT NULL,
   `id_paci` VARCHAR(11) NOT NULL,
-  `horario_cita` TIME NOT NULL,
+  `horario_cita` VARCHAR(5) NOT NULL,
   `asistio_cita` TINYINT NOT NULL,
   PRIMARY KEY (`id_cita`),
   INDEX `FK_disp_idx` (`id_disp` ASC) VISIBLE,
