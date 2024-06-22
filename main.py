@@ -16,4 +16,4 @@ app_flask.register_blueprint(disponibilidades_bp)
 app_flask.register_blueprint(tratamientos_bp)
 
 if __name__ == '__main__':
-    app_flask.run(debug=False, port=5000)
+    app_flask.run(debug=False, port=5050)
