@@ -17,3 +17,8 @@ def add_contacto():
 @contactos_eme_bp.route('/contactos_eme', methods=['PUT'])
 def modify_contacto():
     return contacto_modify()
+
+
+@contactos_eme_bp.route('/contactos_eme', methods=['DELETE'])
+def delete_contacto():
+    return contacto_delete()

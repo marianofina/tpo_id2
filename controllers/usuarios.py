@@ -17,3 +17,8 @@ def add_usuario():
 @usuarios_bp.route('/usuario', methods=['PUT'])
 def modify_usuario():
     return user_modify()
+
+
+@usuarios_bp.route('/usuario', methods=['DELETE'])
+def delete_usuario():
+    return user_delete()

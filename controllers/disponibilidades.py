@@ -22,3 +22,8 @@ def add_disponibilidad():
 @disponibilidades_bp.route('/disponibilidades', methods=['PUT'])
 def modify_disponibilidad():
     return disponibilidad_modify()
+
+
+@disponibilidades_bp.route('/disponibilidades', methods=['DELETE'])
+def delete_disponibilidad():
+    return disponibilidad_delete()

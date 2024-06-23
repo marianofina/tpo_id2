@@ -23,3 +23,7 @@ def medicos_esp_add():
 def medicos_esp_modify():
     return meep_modify()
 
+
+@medicos_esp_bp.route('/medicos_esp', methods=['DELETE'])
+def medicos_esp_delete():
+    return meep_delete()

@@ -22,3 +22,8 @@ def categorias_get():
 @categorias_bp.route('/categoria', methods=['PUT'])
 def categorias_modify():
     return modify_categoria(request.json)
+
+
+@categorias_bp.route('/categoria', methods=['DELETE'])
+def delete_categoria():
+    return categoria_delete()

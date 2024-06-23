@@ -17,3 +17,8 @@ def add_paciente():
 @pacientes_bp.route('/pacientes', methods=['PUT'])
 def modify_paciente():
     return paciente_modify()
+
+
+@pacientes_bp.route('/pacientes', methods=['DELETE'])
+def delete_paciente():
+    return paciente_delete()

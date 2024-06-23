@@ -23,3 +23,7 @@ def medico_add():
 def modify_medico():
     return medico_modify()
 
+
+@medicos_bp.route('/medico', methods=['DELETE'])
+def delete_medico():
+    return medico_delete()

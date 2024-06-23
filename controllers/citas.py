@@ -17,3 +17,8 @@ def add_cita():
 @citas_bp.route('/citas', methods=['PUT'])
 def modify_cita():
     return cita_modify()
+
+
+@citas_bp.route('/citas', methods=['DELETE'])
+def delete_cita():
+    return cita_delete()
