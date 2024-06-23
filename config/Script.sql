@@ -150,7 +150,6 @@ CREATE TABLE IF NOT EXISTS `mydb`.`citas` (
   `id_paci` VARCHAR(11) NOT NULL,
   `horario_cita` VARCHAR(5) NOT NULL,
   `asistio_cita` TINYINT NOT NULL,
-  `dia_cita` ENUM('Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo') NOT NULL,
   PRIMARY KEY (`id_cita`),
   INDEX `FK_disp_idx` (`id_disp` ASC) VISIBLE,
   INDEX `FK_paci_idx` (`id_paci` ASC) VISIBLE,
@@ -163,7 +162,10 @@ CREATE TABLE IF NOT EXISTS `mydb`.`citas` (
     FOREIGN KEY (`id_paci`)
     REFERENCES `mydb`.`pacientes` (`id_paci`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON UPDATE NO ACTION),
+    CONSTRAINT `UC_horario`
+    UNIQUE (`id_disp, horario_cita`)
+
 ENGINE = InnoDB;
 
 USE `mydb` ;

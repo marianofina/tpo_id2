@@ -3,7 +3,7 @@ from flask_jwt_extended import get_jwt_identity
 
 from config.mysql import mysql
 from functions.id_generator import id_generator
-
+from functions.citas_x_turno import citas_x_turno
 
 def citas_get():
     try:
@@ -59,11 +59,14 @@ def create_cita():
             if cantidad != 0:
                 while cita(new_id) is not None:
                     new_id = id_generator("cit")
-            cursor.execute('INSERT INTO citas (id_cita, id_disp, id_paci, dia_cita, horario_cita, asistio_cita) VALUES (%s, %s, %s, %s, %s, %s)',
-                           (new_id, data['id_disp'], data['id_paci'], data['dia_cita'], data['horario_cita'], False), )
-            mysql.connection.commit()
-            cursor.close()
-            return jsonify({"message": "Cita creada"}), 201
+            if citas_x_turno(data['horario_cita'], data['id_disp']):
+                cursor.execute('INSERT INTO citas (id_cita, id_disp, id_paci, horario_cita, asistio_cita) VALUES (%s, %s, %s, %s, %s)',
+                               (new_id, data['id_disp'], data['id_paci'], data['horario_cita'], False), )
+                mysql.connection.commit()
+                cursor.close()
+                return jsonify({"message": "Cita creada"}), 201
+            else:
+                return jsonify({"message": "Horario no disponible"}), 400
         else:
             return jsonify({"message": "No autorizado"}), 401
     except Exception as e:
@@ -78,17 +81,20 @@ def cita_modify():
         current_user_id = get_jwt_identity()
         data = request.json
         if current_user_id[0] == data['id_paci']:
-            query = "UPDATE citas SET "
-            for key in data:
-                if key != 'id_cita' and key != 'id_paci':
-                    query += f"{key} = '{data[key]}', "
-            query = query.replace("''", "' '")
-            query = query[:-2]
-            query += f" WHERE id_cita = '{data['id_cita']}'"
-            cursor.execute(query)
-            mysql.connection.commit()
-            cursor.close()
-            return jsonify({"message": "Datos modificados"}), 200
+            if citas_x_turno(data['horario_cita'], data['id_disp']):
+                query = "UPDATE citas SET "
+                for key in data:
+                    if key != 'id_cita' and key != 'id_paci':
+                        query += f"{key} = '{data[key]}', "
+                query = query.replace("''", "' '")
+                query = query[:-2]
+                query += f" WHERE id_cita = '{data['id_cita']}'"
+                cursor.execute(query)
+                mysql.connection.commit()
+                cursor.close()
+                return jsonify({"message": "Datos modificados"}), 200
+            else:
+                return jsonify({"message": "Horario no disponible"}), 400
         else:
             return jsonify({"message": "No autorizado"}), 401
     except Exception as e:
