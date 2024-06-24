@@ -1,5 +1,4 @@
 from flask import request, jsonify
-from werkzeug.security import check_password_hash
 
 from config.mysql import mysql
 from functions.id_generator import id_generator

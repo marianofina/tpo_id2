@@ -183,7 +183,21 @@ DELIMITER $$
 USE `mydb`$$
 CREATE PROCEDURE `GetCitasByPaciente` (IN id_paciente VARCHAR(11))
 BEGIN
-	SELECT * FROM VIEW_citas WHERE id_paci = id_paciente;
+	SELECT * FROM VIEW_citas WHERE id_paci = id_paciente AND asistio_cita = 0;
+END$$
+
+DELIMITER ;
+
+
+-- -----------------------------------------------------
+-- procedure GetHistorialByPaciente
+-- -----------------------------------------------------
+
+DELIMITER $$
+USE `mydb`$$
+CREATE PROCEDURE `GetHistorialByPaciente` (IN id_paciente VARCHAR(11))
+BEGIN
+	SELECT * FROM VIEW_citas WHERE id_paci = id_paciente AND asistio_cita = 1;
 END$$
 
 DELIMITER ;

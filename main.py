@@ -9,6 +9,7 @@ from controllers.usuarios import usuarios_bp
 from controllers.contactos_eme import contactos_eme_bp
 from controllers.pacientes import pacientes_bp
 from controllers.citas import citas_bp
+from controllers.rep_usuarios import rep_usuarios_bp
 
 # MongoDB
 from controllers.tratamientos import tratamientos_bp
@@ -21,6 +22,7 @@ app_flask.register_blueprint(usuarios_bp)
 app_flask.register_blueprint(contactos_eme_bp)
 app_flask.register_blueprint(pacientes_bp)
 app_flask.register_blueprint(citas_bp)
+app_flask.register_blueprint(rep_usuarios_bp)
 app_flask.register_blueprint(tratamientos_bp)
 
 if __name__ == '__main__':
