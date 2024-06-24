@@ -34,5 +34,5 @@ El archivo config/Script.sql contiene los scripts necesarios para crear las tabl
 ## Iniciar la API
 
 Posicionándose sobre la ruta principal y ejecutando el comando:
-"py main.py"
+py main.py
 debería correr en localhost:5000
