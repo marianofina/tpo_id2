@@ -16,15 +16,11 @@ def get_medicos():
 
 
 def get_medico_by_id(id_medi: str):
-    try:
-        cursor = mysql.connection.cursor()
-        cursor.execute("SELECT * FROM medicos WHERE id_medi = %s", (id_medi,))
-        medico = cursor.fetchone()
-        cursor.close()
-        return jsonify(medico)
-    except Exception as e:
-        print(e)
-        return jsonify({"message": "Error"}), 500
+    cursor = mysql.connection.cursor()
+    cursor.execute("SELECT * FROM medicos WHERE id_medi = %s", (id_medi,))
+    medico = cursor.fetchone()
+    cursor.close()
+    return medico
 
 
 def add_medico():
@@ -75,3 +71,4 @@ def medico_delete():
     except Exception as e:
         print(e)
         return jsonify({"message": "Error"}), 500
+

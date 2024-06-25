@@ -1,17 +1,18 @@
-from flask import request, jsonify
+from bson.objectid import ObjectId
 from config.mongodb import mongo
 
 
-def set_tratamiento_service():
-    data = request.json
-    mongo.db.tratamientos.insert_one(data)
-    return jsonify({"message": "Tratamiento guardado"})
+def insert_tratamiento(tratamiento):
+    return mongo.db.tratamientos_medicos.insert_one(tratamiento)
 
 
-def get_tratamientos_service():
-    tratamientos = mongo.db.tratamientos.find()
-    response = []
-    for tratamiento in tratamientos:
-        tratamiento['_id'] = str(tratamiento['_id'])
-        response.append(tratamiento)
-    return jsonify(response)
+def get_tratamiento(id):
+    return mongo.db.tratamientos_medicos.find_one({"_id": ObjectId(id)})
+
+
+def update_tratamiento(id, actualizacion):
+    return mongo.db.tratamientos_medicos.update_one({"_id": ObjectId(id)}, {"$set": actualizacion})
+
+
+def delete_tratamiento(id):
+    return mongo.db.tratamientos_medicos.delete_one({"_id": ObjectId(id)})

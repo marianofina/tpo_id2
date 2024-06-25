@@ -26,3 +26,8 @@ def get_citas(id_paci):
 @rep_usuarios_bp.route('/historial_por_paciente/<id_paci>', methods=['GET'])
 def get_historial(id_paci):
     return get_historial_by_usuario(id_paci)
+
+
+@rep_usuarios_bp.route('/comentarios_por_medico/<id_medico>', methods=['GET'])
+def get_comentarios(id_medico):
+    return get_comentarios_por_medico(id_medico)

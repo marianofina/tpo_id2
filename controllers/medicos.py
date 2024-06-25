@@ -11,7 +11,12 @@ def medicos_get():
 
 @medicos_bp.route('/medico', methods=['GET'])
 def medico_by_id():
-    return get_medico_by_id(request.json["id_medi"])
+    try:
+        rta = get_medico_by_id(request.json["id_medi"])
+        return jsonify(rta)
+    except Exception as e:
+        print(e)
+        return jsonify({"message": "Error"}), 500
 
 
 @medicos_bp.route('/medico', methods=['POST'])
