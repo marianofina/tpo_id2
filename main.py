@@ -13,6 +13,8 @@ from controllers.rep_usuarios import rep_usuarios_bp
 
 # MongoDB
 from controllers.tratamientos import tratamientos_bp
+from controllers.hospitalizaciones import hospitalizaciones_bp
+from controllers.historiales_medicos import historial_medico_bp
 
 app_flask.register_blueprint(medicos_bp)
 app_flask.register_blueprint(categorias_bp)
@@ -24,6 +26,8 @@ app_flask.register_blueprint(pacientes_bp)
 app_flask.register_blueprint(citas_bp)
 app_flask.register_blueprint(rep_usuarios_bp)
 app_flask.register_blueprint(tratamientos_bp)
+app_flask.register_blueprint(hospitalizaciones_bp)
+app_flask.register_blueprint(historial_medico_bp)
 
 if __name__ == '__main__':
     from wsgiref.simple_server import make_server
