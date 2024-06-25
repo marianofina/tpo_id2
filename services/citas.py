@@ -5,6 +5,7 @@ from config.mysql import mysql
 from functions.id_generator import id_generator
 from functions.citas_x_turno import citas_x_turno
 
+
 def citas_get():
     try:
         cursor = mysql.connection.cursor()

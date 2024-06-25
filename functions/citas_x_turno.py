@@ -8,7 +8,6 @@ def get_horario_turno(horario: str):
         if (hora < 0 or hora > 23) and (minuto != 0 or minuto != 15 or minuto != 30 or minuto != 45):
             return False
         else:
-            print(hora, minuto)
             return hora, minuto
     except Exception as e:
         print(e)
@@ -32,7 +31,7 @@ def validator(horario: str):
 def get_hora_disp(id_disp: str):
     try:
         cursor = mysql.connection.cursor()
-        cursor.execute('SELECT horario_disp FROM disponibilidad WHERE id_disp = %s', (id_disp,))
+        cursor.execute('SELECT * FROM disponibilidades WHERE id_disp = %s', (id_disp,))
         data = cursor.fetchone()
         cursor.close()
         return data[1], data[2]

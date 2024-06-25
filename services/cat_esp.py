@@ -36,7 +36,7 @@ def add_categoria(data):
         cursor.execute("INSERT INTO especialidades (id_espe, descripcion) VALUES (%s, %s)", (new_id, data['descripcion'],))
         mysql.connection.commit()
         cursor.close()
-        return jsonify({"message": "Datos cargados"}), 400
+        return jsonify({"message": "Datos cargados"}), 200
     except Exception as e:
         print(e)
         return jsonify({"message": "Error al cargar los datos"}), 400

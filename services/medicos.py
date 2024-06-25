@@ -28,7 +28,7 @@ def add_medico():
         cursor = mysql.connection.cursor()
         data = request.json
         new_id = id_generator("med")
-        while get_medico_by_id(new_id) is None:
+        while get_medico_by_id(new_id) is not None:
             new_id = id_generator("med")
         cursor.execute("INSERT INTO medicos (id_medi, legajo_medi, nombre_med, apellido_med, nacimiento_med, ingreso_med) VALUES (%s, %s, %s, %s, %s, %s)", (new_id, data['legajo'], data['nombre'], data['apellido'], data['nacimiento'], data['ingreso'],))
         mysql.connection.commit()
